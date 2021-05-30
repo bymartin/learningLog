@@ -8,7 +8,7 @@ From the book Python Crash Course, 2nd edition
 
 Django (https://djangoproject.com/)
 
-### Getting your environment setup
+## Getting your environment setup
 
 >cd learningLog
 >python3 -m venv ll_env
@@ -16,10 +16,10 @@ Django (https://djangoproject.com/)
 
 To stop using the virtual environment, 'deactivate'
 
-### Install Django
+## Install Django
 >pip install django
 
-### Creating a project in Django
+## Creating a project in Django
 (ll_env)learning_log$ django-admin startproject learning_log .
 
 (ll_env)learning_log$ ls
@@ -33,14 +33,14 @@ __init__.py settings.py urls.py wsgi.py
 >ls
 You will see db.sqlite3 created (SQLite database)
 
-### Viewing the project
+## Viewing the project
 >python manage.py runserver
 
 If you receive the error message That port is already in use, tell Django to use
 a different port by entering python manage.py runserver 8001, and then cycle
 through higher numbers until you find an open port.
 
-### Starting an app
+## Starting an app
 
 Leave the development server running. Open a new tab and activate the
 virtual environment.
@@ -50,13 +50,13 @@ virtual environment.
 
 >python manage.py startapp learning_logs
 
-### Defining models
+## Defining models
 models.py in the app directory
 
 Django Model Field Reference at
 https://docs.djangoproject.com/en/2.2/ref/models/fields/
 
-### Activating Models
+## Activating Models
 open settings.py in learning_log directory
 add our new app under INSTALLED_APPS
 
@@ -73,7 +73,7 @@ to do three steps.
 2. call makemigrations on learning_logs
 3. tell Django to migrate the project
 
-### Django Admin Site
+## Django Admin Site
 
 Create a superuser:
 python manage.py createsuperuser
@@ -98,7 +98,7 @@ admin.py
 ### Django shell
 >python manage.py shell
 
-## Making pages - Home page
+### Making pages - Home page
 define URL, write view, write template
 
 base URL, http://localhost:8000/
@@ -115,7 +115,7 @@ In learning_logs folder, make a new folder called templates.
 Inside that, make a new folder called learning_logs.
 Make a new file called index.html.
 
-## Template Inheritance
+### Template Inheritance
 
 Parent template:
 Create base.html in same directory as index.html
@@ -127,7 +127,7 @@ modify urls.py
 modify views.py
 make topics.html
 
-## User Accounts
+### User Forms
 
 Topic ModelForm
 Create forms.py in the same folder as models.py
@@ -140,6 +140,56 @@ new_entry URL, new_entry view function and template
 
 Editing Entries:
 edit_entry URL, edit_entry view and template
+
+## User Accounts
+
+Create new app called users
+> python manage.py startapp users
+Add new app to settings.py
+Modify root urls.py
+Make a urls.py in the users folder
+
+Inside the users directory,
+> mkdir -p templates/registration
+Make a login.html here
+
+Connect data to certain users
+- add a foreign key relationship to a user in models.py
+Then migrate DB
+python manage.py makemigrations learning_logs
+Pick 1 and then id of one of the users
+python manage.py migrate
+
+Restricting topics access to correcd users:
+User should only see the topics they own
+Change views.py
+
+Protecting a user's topic:
+Any registered user could find a topic by accident - 
+    http://localhost:8000/topics/3/ for example and might get a match
+Modify views.py to add a check
+
+## Making the app look better and deployment
+
+Styling - use Bootstrap library
+Deploy using Heroku
+
+### django-bootstrap4 App
+
+> pip install django-bootstrap4
+
+https://getbootstrap.com/
+Click examples to see templates
+
+We will use this one:
+https://getbootstrap.com/docs/5.0/examples/navbar-static/
+
+
+
+
+
+
+
 
 
 
