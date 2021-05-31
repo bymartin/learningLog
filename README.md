@@ -186,6 +186,7 @@ https://getbootstrap.com/docs/5.0/examples/navbar-static/
 
 ## Deployment using Heroku
 https://www.heroku.com/
+https://devcenter.heroku.com/categories/python-support
 
 Install the Heroku CLI
 https://devcenter.heroku.com/articles/heroku-cli
@@ -218,6 +219,51 @@ Make a Procfile to start processes
 This goes in the same folder as manage.py
 It has one line:
 web: gunicorn learning_log.wsgi --log-file -
+
+Pushing to Heroku:
+heroku login
+heroku create
+git push heroku master
+git push heroku main
+
+Project is now deployed. See public URL created.
+You can also "heroku open" to open the web site.
+
+Check server process started okay:
+> heroku ps
+
+Server is deployed but not ready. We need to setup the public database.
+> heroku run python manage.py migrate
+Now it may be used!
+
+### Refine the deployment
+
+Create a superuser on Heroku:
+> heroku run bash
+~ $ ls
+learning_log  learning_logs  manage.py  Procfile  README.md  requirements.txt  runtime.txt  staticfiles  users
+~ $ python manage.py createsuperuser
+
+Add /admin/ to the end of the URL for the live app to login to the admin site.
+
+Make the URL more user friendly:
+heroku apps:rename new-name
+
+Securing the live project:
+We don't want the detailed debug we pages shown on the live deployment.
+Change settigns.py
+# Heroku settings
+import os
+import django_on_heroku
+django_on_heroku.settings(locals())
+
+if os.environ.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.environ.get('DEBUG') == 'FALSE':
+    DEBUG = Fals
+
+Commit and push changes
+
 
 
 
