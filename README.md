@@ -184,6 +184,44 @@ Click examples to see templates
 We will use this one:
 https://getbootstrap.com/docs/5.0/examples/navbar-static/
 
+## Deployment using Heroku
+https://www.heroku.com/
+
+Install the Heroku CLI
+https://devcenter.heroku.com/articles/heroku-cli
+
+Install three packages that helps server Django projects
+on a live server from your virtual environmnent:
+pip install psycopg2-binary
+pip install django-on-heroku
+pip install gunicorn
+
+Create a requirements.txt file
+venv> pip freeze > requirements.txt
+Heroku will install all the same packages listed in requirements.txt.
+So it should behave the same as our local system.
+
+Specifying the Python runtime:
+venv> python --version
+Python 3.8.5
+
+Make a new file 'runtime.txt' in the same folder as manage.py.
+Put the following:
+python-3.8.5
+
+Modify settings.py for Heroku.
+Add following:.
+import django_on_heroku
+django_on_heroku.settings(locals())
+
+Make a Procfile to start processes
+This goes in the same folder as manage.py
+It has one line:
+web: gunicorn learning_log.wsgi --log-file -
+
+
+
+
 
 
 
