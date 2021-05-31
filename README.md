@@ -263,6 +263,24 @@ elif os.environ.get('DEBUG') == 'FALSE':
     DEBUG = Fals
 
 Commit and push changes
+git push heroku main
+Heroku will rebuild the project.
+
+Set the environment variable on Heroku:
+heroku config:set DEBUG=FALSE
+Heroku will restart the project
+
+Make custom error pages for Heroku:
+404 error - object doesn't exist
+500 error - error in code
+at top level with manage.py, mkdir templates
+Make 404.html and 500.html here
+Modify settings.py
+Push changes to heroku.
+
+
+
+
 
 
 
